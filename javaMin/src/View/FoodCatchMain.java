@@ -1,10 +1,13 @@
 package View;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import Conn.DAO;
 import JDBC.Member_DAO;
 import JDBC.Member_DTO;
+import JDBC.RecipeDAO;
+import JDBC.RecipeDTO;
 
 public class FoodCatchMain {
 
@@ -12,6 +15,8 @@ public class FoodCatchMain {
 		Scanner sc = new Scanner(System.in);
 		Member_DAO dao = new Member_DAO();
 		DAO da = new DAO();
+		Random ran=new Random();
+		RecipeDAO rdao=new RecipeDAO();
 		
 		while (true) {
 			System.out.println("\r\n" + "\r\n"
@@ -85,6 +90,29 @@ public class FoodCatchMain {
 					
 					case 2: // 게임시작
 							da.TimeFirst();
+							int gameNum=5;
+							int selectList[]=new int[gameNum];
+							int recipeNum=rdao.RecipeNumber()+1;
+							for(int i=0;i<gameNum;i++) {
+								int random=ran.nextInt(recipeNum);
+								selectList[i]=random;
+								for(int j=0;j<i;j++) {
+									if(selectList[j]==random) {
+										i--;
+										break;
+									}
+								}
+							}
+							
+							
+							for(int i=0;i<gameNum;i++) {
+								System.out.printf("[%d번째 레시피 문제 시작]\n",i+1);
+								RecipeDTO rdto=rdao.getRDTP(selectList[i]);
+								String recipe[]=rdao.getRecipe(selectList[i]);
+								for(int j=0;j<6;j++) {
+									System.out.printf("레시피 - %d : %s\n",j+1,recipe[j]);
+								}
+							}
 							
 					break;		
 					case 3 ://랭킹보기
