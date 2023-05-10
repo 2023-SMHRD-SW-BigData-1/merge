@@ -10,7 +10,7 @@ import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
 import JDBC.RecipeDTO;
 import JDBC.Score_DTO;
-
+					// 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
 public class FoodCatchMain {
 
 	public static void main(String[] args) {
@@ -105,22 +105,6 @@ public class FoodCatchMain {
 								break;
 
 						case 2: // 게임시작
-							for (int i = 3; i > 0; i--) {
-					            System.out.println("\n\t\t\t\t   "+"[ "+i+" ]");
-					            try {
-					                Thread.sleep(1000);
-					            } catch (InterruptedException e) {
-					                e.printStackTrace();
-					            }
-					        }	
-							System.out.println("\r\n"
-									+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
-									+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
-									+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
-									+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
-									+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
-									+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
-							System.out.println("\n\t\t   ================ 시작!! ================");
 							int gameNum = 5;
 							int selectList[] = new int[gameNum];
 							int recipeNum = rdao.RecipeNumber() + 1;
@@ -137,13 +121,30 @@ public class FoodCatchMain {
 
 							int totalScore = 0;
 							for (int i = 0; i < gameNum; i++) {
-								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
+								for (int j = 3; j > 0; j--) {
+									System.out.println("\n\t\t\t\t   "+"[ "+j+" ]");
+									try {
+										Thread.sleep(1000);
+									} catch (InterruptedException e) {
+									}
+								}	
+								System.out.println("\r\n"
+										+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
+										+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
+										+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
+										+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
+										+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
+										+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
+								System.out.println("\n\t\t   ================ 시작!! ================");
+								
+								
+								System.out.printf("\t\t\t     [%d번째 레시피 문제 시작]\n", i + 1);
 								int score = 30;
 								RecipeDTO rdto = rdao.getRDTP(selectList[i]);
 								String recipe[] = rdao.getRecipe(selectList[i]);
 								for (int j = 0; j < 6; j++) {
-									System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
-									System.out.print("정답 >> ");
+									System.out.printf("\t %d : %s\n", j + 1, recipe[j]);
+									System.out.print("\t 정답 >> ");
 									String ans = sc.next();
 									if (ans.equals(rdto.getAns())) {
 										totalScore += score;
@@ -153,7 +154,7 @@ public class FoodCatchMain {
 									System.out.println("오답입니다!(-5)\n");
 									score -= 5;
 								}
-								System.out.println("\n\n\n\n\n");
+								System.out.println("\n\n");
 							}
 
 							System.out.println(("총점 : ") + totalScore);
