@@ -58,7 +58,7 @@ public class Member_DAO {
 			row = pst.executeUpdate();
 
 		} catch (Exception e) {
-			System.out.println("아이디가 중복됩니다.");
+			
 		} finally {
 			getClose();
 		}

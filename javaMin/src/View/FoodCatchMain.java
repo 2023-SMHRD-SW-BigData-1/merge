@@ -40,28 +40,34 @@ public class FoodCatchMain {
 
 			switch(input){
 			case 1:// 회원가입
-				System.out.print("\t\t\t\t ID 입력 : ");
+				while(true) {
+				System.out.print("\n\t\t\t\t  ID 입력 : ");
 				String id = sc.next();
-				System.out.print("\t\t\t\t PW 입력 : ");
+				System.out.print("\t\t\t\t  PW 입력 : ");
 				String pw = sc.next();
-				System.out.print("\t\t\t\t 이름 입력 : ");
+				System.out.print("\t\t\t\t  이름 입력 : ");
 				String name = sc.next();
 				System.out.println();
 				Member_DTO mdto = new Member_DTO(id, pw, name, score);
 				int row = dao.join(mdto);
 				if (row > 0) {
-					System.out.println("회원가입 성공");
+					System.out.println("\t\t   ============== 회원가입 성공 ==============");
+					break;
 				} else {
-					System.out.println("회원가입 실패");
+					System.out.println("\t\t   ============== 회원가입 실패 ==============");
+					System.out.println("\t\t\t\t다시 입력해주세요!!");
+					System.out.println("\t\t   ========================================");
+					continue;
+				}
 				}
 			break;
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------					
 			case 2 :// 로그인
 				    // 1. 사용자로부터 아이디와 비밀번호 입력 받기
-				System.out.print("ID 입력 : ");
-				id = sc.next();
-				System.out.print("PW 입력 : ");
-				pw = sc.next();
+				System.out.print("\n\t\t\t\t  ID 입력 : ");
+				String id = sc.next();
+				System.out.print("\t\t\t\t  PW 입력 : ");
+				String pw = sc.next();
 				Member_DTO dto = dao.login(id, pw);
 				if (dto != null) {// 로그인 성공
 					while(true) {
