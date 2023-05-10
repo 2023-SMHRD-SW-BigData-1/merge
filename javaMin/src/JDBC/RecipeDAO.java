@@ -40,39 +40,39 @@ public class RecipeDAO {
 		}
 	}
 
-	public int RecipeNumber(){
+	public int RecipeNumber() {
 		getConn();
-		String sql="select max(num) from question";
-		int result=0;
+		String sql = "select max(num) from question";
+		int result = 0;
 		try {
-			pst=conn.prepareStatement(sql);
-			rs=pst.executeQuery();
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
 			rs.next();
-			result=rs.getInt(1);
+			result = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			getClose();
 		}
 		return result;
 	}
 
 	public String[] getRecipe(int i) {
-		String result[]=new String[6];
-		int cnt=0;
+		String result[] = new String[6];
+		int cnt = 0;
 		getConn();
-		String sql="select list from recipe where num=? order by count";
+		String sql = "select list from recipe where num=? order by count";
 		try {
-			pst=conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sql);
 			pst.setInt(1, i);
-			rs=pst.executeQuery();
-			while(rs.next()) {
-				result[cnt]=rs.getString(1);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				result[cnt] = rs.getString(1);
 				cnt++;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			getClose();
 		}
 		return result;
@@ -80,25 +80,22 @@ public class RecipeDAO {
 
 	public RecipeDTO getRDTP(int i) {
 		getConn();
-		RecipeDTO result=null;
-		String sql="select answer,hint1,hint2,hint3 from question where num=?";
+		RecipeDTO result = null;
+		String sql = "select answer,hint1,hint2,hint3 from question where num=?";
 		try {
-			pst=conn.prepareStatement(sql);
+			pst = conn.prepareStatement(sql);
 			pst.setInt(1, i);
-			rs=pst.executeQuery();
+			rs = pst.executeQuery();
 			rs.next();
-			String ans=rs.getString(1);
-			String hint1=rs.getString(2);
-			String hint2=rs.getString(3);
-			String hint3=rs.getString(4);
-			result=new RecipeDTO(ans, hint1, hint2, hint3);
+			String ans = rs.getString(1);
+			String hint1 = rs.getString(2);
+			String hint2 = rs.getString(3);
+			String hint3 = rs.getString(4);
+			result = new RecipeDTO(ans, hint1, hint2, hint3);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-
-
-
 
 }

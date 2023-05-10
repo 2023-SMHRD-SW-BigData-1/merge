@@ -6,6 +6,7 @@ import java.util.TimerTask;
 public class DAO {
 	int countmain = 6;
 	int countfirst = 5;
+
 	public void timeMain() { // 타이머
 		Timer m = new Timer();
 		TimerTask task = new TimerTask() {
@@ -22,7 +23,7 @@ public class DAO {
 			}
 		};
 		m.schedule(task, 10 * 100, 10000);
-	}//<-- time
+	}// <-- time
 
 	public void TimeFirst() {
 		Timer m = new Timer();
@@ -40,7 +41,6 @@ public class DAO {
 			}
 		};
 		m.schedule(task, 0, 1000);
-	}//<-- TimeFirst
-		
-	
+	}// <-- TimeFirst
+
 }

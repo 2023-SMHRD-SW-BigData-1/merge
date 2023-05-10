@@ -1,7 +1,7 @@
 package JDBC;
 
 public class Member_DTO {
-	
+
 	private String id;
 	// 비밀번호
 	private String pw;
@@ -9,7 +9,7 @@ public class Member_DTO {
 	private String name;
 	// 나이
 	private int score;
-	
+
 	// 2. 메소드
 	public Member_DTO(String id, String pw, String name, int score) {
 		super();
@@ -48,10 +48,7 @@ public class Member_DTO {
 	}
 
 	public void setScore(int score) {
-		this.score =score;
+		this.score = score;
 	}
-	
-	
-	
 
 }
