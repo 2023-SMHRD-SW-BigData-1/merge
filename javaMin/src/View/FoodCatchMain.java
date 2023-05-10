@@ -26,7 +26,7 @@ public class FoodCatchMain {
 
 		System.out.println("\t");
 		while (true) {
-			System.out.printf("%20s%20s%20s   %s", "[1]회원가입", "[2]로그인", "[3]종료", ">>");
+			System.out.printf("%20s%20s%20s   %s   ", "[1]회원가입", "[2]로그인", "[3]종료", ">>");
 			int input = sc.nextInt();
 			int score = 0;
 
