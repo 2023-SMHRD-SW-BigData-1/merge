@@ -19,6 +19,7 @@ public class FoodCatchMain {
 		RecipeDAO rdao=new RecipeDAO();
 		
 		while (true) {
+			
 			System.out.println("\r\n" + "\r\n"
 					+ "░█████╗░░█████╗░░█████╗░██╗░░██╗░░░  ██████╗░░█████╗░██████╗░██████╗░██╗░░░██╗░░░      \r\n"
 					+ "██╔══██╗██╔══██╗██╔══██╗██║░██╔╝░░░  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗░██╔╝░░░      \r\n"
@@ -35,7 +36,7 @@ public class FoodCatchMain {
 			
 			System.out.println("\t");
 			System.out.printf("%20s%20s%20s   %s   ", "[1]회원가입", "[2]로그인", "[3]종료", ">>");
-			int input = sc.nextInt();
+			int input = sc.nextInt();			
 			int score = 0;
 
 			switch(input){
@@ -56,6 +57,7 @@ public class FoodCatchMain {
 				} else {
 					System.out.println("\t\t   ============== 회원가입 실패 ==============");
 					System.out.println("\t\t\t\t다시 입력해주세요!!");
+					System.out.println("\t\t\t[1]다시입력\t\t[2]이전");
 					System.out.println("\t\t   ========================================");
 					continue;
 				}
