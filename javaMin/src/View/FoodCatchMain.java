@@ -73,6 +73,7 @@ public class FoodCatchMain {
 			// -----------------------------------------------------------------------------------------------------------------------------------------------------------
 			case 2:// 로그인
 					// 1. 사용자로부터 아이디와 비밀번호 입력 받기
+				System.out.println("\n\t\t   ================ 로그인 ================");
 				System.out.print("\n\t\t\t\t  ID 입력 : ");
 				String id = sc.next();
 				System.out.print("\t\t\t\t  PW 입력 : ");
@@ -81,7 +82,7 @@ public class FoodCatchMain {
 				if (dto != null) {// 로그인 성공
 					while (true) {
 						System.out.println(
-								"\r\n" + "\t░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗\r\n"
+								"\r\n" +  "\t░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗\r\n"
 										+ "\t░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝\r\n"
 										+ "\t░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░\r\n"
 										+ "\t░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░\r\n"
@@ -104,7 +105,22 @@ public class FoodCatchMain {
 								break;
 
 						case 2: // 게임시작
-							da.TimeFirst();
+							for (int i = 3; i > 0; i--) {
+					            System.out.println("\n\t\t\t\t   "+"[ "+i+" ]");
+					            try {
+					                Thread.sleep(1000);
+					            } catch (InterruptedException e) {
+					                e.printStackTrace();
+					            }
+					        }	
+							System.out.println("\r\n"
+									+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
+									+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
+									+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
+									+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
+									+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
+									+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
+							System.out.println("\n\t\t   ================ 시작!! ================");
 							int gameNum = 5;
 							int selectList[] = new int[gameNum];
 							int recipeNum = rdao.RecipeNumber() + 1;
@@ -141,18 +157,16 @@ public class FoodCatchMain {
 							}
 
 							System.out.println(("총점 : ") + totalScore);
-
+							
 							break;
 						case 3:// 랭킹보기
 							ArrayList<Score_DTO> arr = dao.rank();
 
-							System.out.println(" == 점수보기 == ");
-
-							System.out.print("닉네임\t스코어");
-							System.out.println();
+							System.out.println("\n\t\t   ============== 점수 보기 ==============");
+							System.out.printf("\t\t\t%10s%9s\n\t\t\t %10s%10s","닉네임","스코어","===","===");
+							System.out.println();		
 							for (int i = 0; i < arr.size(); i++) {
-
-								System.out.print(arr.get(i).getName() + " \t" + arr.get(i).getScore());
+								System.out.printf("\t\t\t%10s%10d",arr.get(i).getName(),arr.get(i).getScore());
 								System.out.println();
 							}
 							break;
