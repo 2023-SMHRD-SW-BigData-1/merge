@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DAO {
+public class Member_DAO {
 
 	Connection conn = null;
 	PreparedStatement pst = null;
@@ -40,7 +40,7 @@ public class DAO {
 		}
 	}
 
-	public int join(DTO mdto) {
+	public int join(Member_DTO mdto) {
 		int row = 0;
 
 		try {
@@ -65,10 +65,10 @@ public class DAO {
 		return row;
 	}
 
-	public DTO login(String id, String pw) {
+	public Member_DTO login(String id, String pw) {
 		getConn();
 		String sql = "SELECT * FROM MEMBER WHERE ID = ? AND PW = ?";
-		DTO mdto = null;
+		Member_DTO mdto = null;
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
@@ -80,7 +80,7 @@ public class DAO {
 				String s_pw = rs.getString(2);
 				String s_name = rs.getString(3);
 				int s_score = rs.getInt(4);
-				mdto = new DTO(s_id, s_pw, s_name, s_score);
+				mdto = new Member_DTO(s_id, s_pw, s_name, s_score);
 			}
 
 		} catch (SQLException e) {
