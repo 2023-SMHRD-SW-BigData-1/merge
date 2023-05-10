@@ -19,7 +19,6 @@ public class FoodCatchMain {
 		DAO da = new DAO();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
-		Score_DTO sdto = null;
 
 		while (true) {
 			System.out.println("\r\n" + "\r\n"
@@ -39,7 +38,7 @@ public class FoodCatchMain {
 			System.out.println("\t");
 			System.out.printf("%20s%20s%20s   %s   ", "[1]회원가입", "[2]로그인", "[3]종료", ">>");
 			int input = sc.nextInt();
-			int score = 0;
+			int scoreL = 0;
 
 			switch (input) {
 			case 1:// 회원가입
@@ -51,7 +50,7 @@ public class FoodCatchMain {
 					System.out.print("\t\t\t\t  이름 입력 : ");
 					String name = sc.next();
 					System.out.println();
-					Member_DTO mdto = new Member_DTO(id, pw, name, score);
+					Member_DTO mdto = new Member_DTO(id, pw, name, scoreL);
 					int row = dao.join(mdto);
 					if (row > 0) {
 						System.out.println("\t\t   ============== 회원가입 성공 ==============");
@@ -98,7 +97,7 @@ public class FoodCatchMain {
 								break;
 
 						case 2: // 게임시작
-							da.TimeFirst();
+							da.TimeFirst(); 
 							int gameNum = 5;
 							int selectList[] = new int[gameNum];
 							int recipeNum = rdao.RecipeNumber() + 1;
@@ -113,14 +112,28 @@ public class FoodCatchMain {
 								}
 							}
 
-							for (int i = 0; i < gameNum; i++) {
-								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
-								RecipeDTO rdto = rdao.getRDTP(selectList[i]);
-								String recipe[] = rdao.getRecipe(selectList[i]);
-								for (int j = 0; j < 6; j++) {
-									System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
+							int totalScore=0;
+							for(int i=0;i<gameNum;i++) {
+								System.out.printf("[%d번째 레시피 문제 시작]\n",i+1);
+								int score=30;
+								RecipeDTO rdto=rdao.getRDTP(selectList[i]);
+								String recipe[]=rdao.getRecipe(selectList[i]);
+								for(int j=0;j<6;j++) {
+									System.out.printf("레시피 - %d : %s\n",j+1,recipe[j]);
+									System.out.print("정답 >> ");
+									String ans=sc.next();
+									if(ans.equals(rdto.getAns())) {
+										totalScore+=score;
+										System.out.println("정답입니다!\n");
+										break;
+									}
+									System.out.println("오답입니다!(-5)\n");
+									score-=5;
 								}
+								System.out.println("\n\n\n\n\n");
 							}
+							
+							System.out.println(("총점 : ")+totalScore);
 
 							break;
 						case 3:// 랭킹보기
