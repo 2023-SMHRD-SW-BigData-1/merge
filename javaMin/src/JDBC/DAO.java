@@ -17,14 +17,14 @@ public class DAO {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			String url = "jdbc:oracle:thin:@172.30.1.20:1521:xe";
+			String url = "jdbc:oracle:thin:@172.30.0.1:1521:xe";
 			String db_id = "project";
 			String db_pw = "12345";
 
 			conn = DriverManager.getConnection(url, db_id, db_pw);
 
 		} catch (Exception e) {
-			System.out.println("오류발생");
+			e.printStackTrace();
 		}
 	}
 
