@@ -40,11 +40,11 @@ public class FoodCatchMain {
 
 			switch(input){
 			case 1:// 회원가입
-				System.out.print(">> ID 입력 : ");
+				System.out.print("\t\t\t\t ID 입력 : ");
 				String id = sc.next();
-				System.out.print(">> PW 입력 : ");
+				System.out.print("\t\t\t\t PW 입력 : ");
 				String pw = sc.next();
-				System.out.print(">> 이름 입력 : ");
+				System.out.print("\t\t\t\t 이름 입력 : ");
 				String name = sc.next();
 				System.out.println();
 				Member_DTO mdto = new Member_DTO(id, pw, name, score);
