@@ -1,6 +1,6 @@
 package JDBC;
 
-public class DTO {
+public class Member_DTO {
 	
 	private String id;
 	// 비밀번호
@@ -11,7 +11,7 @@ public class DTO {
 	private int score;
 	
 	// 2. 메소드
-	public DTO(String id, String pw, String name, int score) {
+	public Member_DTO(String id, String pw, String name, int score) {
 		super();
 		this.id = id;
 		this.pw = pw;
