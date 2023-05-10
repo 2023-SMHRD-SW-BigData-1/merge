@@ -5,12 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Member_DAO {
 
 	Connection conn = null;
 	PreparedStatement pst = null;
 	ResultSet rs = null;
+	Score_DTO sdto = null;
 
 	public void getConn() {
 
@@ -58,7 +60,7 @@ public class Member_DAO {
 			row = pst.executeUpdate();
 
 		} catch (Exception e) {
-			
+
 		} finally {
 			getClose();
 		}
@@ -89,6 +91,29 @@ public class Member_DAO {
 			getClose();
 		}
 		return mdto;
+	}
+
+	public ArrayList<Score_DTO> rank() {
+
+		ArrayList<Score_DTO> arr = new ArrayList<>();
+		getConn();
+		String sql = "SELECT NAME, SCORE FROM Member WHERE ROWNUM <=5 ORDER BY SCORE DESC";
+		try {
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String s_name = rs.getString(1);
+				int s_score = rs.getInt(2);
+				sdto = new Score_DTO(s_name, s_score);
+				arr.add(sdto);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			getClose();
+		}
+		return arr;
 	}
 
 }
