@@ -11,6 +11,7 @@ import JDBC.RecipeDAO;
 import JDBC.RecipeDTO;
 import JDBC.Score_DTO;
 
+// 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
 public class FoodCatchMain {
 
 	public static void main(String[] args) {
@@ -21,6 +22,7 @@ public class FoodCatchMain {
 		RecipeDAO rdao = new RecipeDAO();
 
 		while (true) {
+
 			System.out.println("\r\n" + "\r\n"
 					+ "░█████╗░░█████╗░░█████╗░██╗░░██╗░░░  ██████╗░░█████╗░██████╗░██████╗░██╗░░░██╗░░░      \r\n"
 					+ "██╔══██╗██╔══██╗██╔══██╗██║░██╔╝░░░  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗╚██╗░██╔╝░░░      \r\n"
@@ -28,7 +30,7 @@ public class FoodCatchMain {
 					+ "██║░░██╗██║░░██║██║░░██║██╔═██╗░██╗  ██║░░██║██╔══██║██║░░██║██║░░██║░░╚██╔╝░░██╗      \r\n"
 					+ "╚█████╔╝╚█████╔╝╚█████╔╝██║░╚██╗╚█║  ██████╔╝██║░░██║██████╔╝██████╔╝░░░██║░░░╚█║      \r\n"
 					+ "░╚════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝░╚╝  ╚═════╝░╚═╝░░╚═╝╚═════╝░╚═════╝░░░░╚═╝░░░░╚╝      \r\n"
-					+ "\r\n" + "\t██████╗░███████╗██╗░░░░░██╗░█████╗░██╗░█████╗░██╗░░░██╗░██████╗██╗\r\n"
+					+ "\t██████╗░███████╗██╗░░░░░██╗░█████╗░██╗░█████╗░██╗░░░██╗░██████╗██╗\r\n"
 					+ "\t██╔══██╗██╔════╝██║░░░░░██║██╔══██╗██║██╔══██╗██║░░░██║██╔════╝██║\r\n"
 					+ "\t██║░░██║█████╗░░██║░░░░░██║██║░░╚═╝██║██║░░██║██║░░░██║╚█████╗░██║\r\n"
 					+ "\t██║░░██║██╔══╝░░██║░░░░░██║██║░░██╗██║██║░░██║██║░░░██║░╚═══██╗╚═╝\r\n"
@@ -39,10 +41,10 @@ public class FoodCatchMain {
 			System.out.printf("%20s%20s%20s   %s   ", "[1]회원가입", "[2]로그인", "[3]종료", ">>");
 			int input = sc.nextInt();
 			int scoreL = 0;
-
 			switch (input) {
 			case 1:// 회원가입
 				while (true) {
+					System.out.println("\n\t\t   ================ 회원가입 ================");
 					System.out.print("\n\t\t\t\t  ID 입력 : ");
 					String id = sc.next();
 					System.out.print("\t\t\t\t  PW 입력 : ");
@@ -58,14 +60,21 @@ public class FoodCatchMain {
 					} else {
 						System.out.println("\t\t   ============== 회원가입 실패 ==============");
 						System.out.println("\t\t\t\t다시 입력해주세요!!");
-						System.out.println("\t\t   ========================================");
-						continue;
+						System.out.println("\t\t\t[1]다시입력\t\t[2]이전");
+						System.out.print("\t\t   ========================================  >> ");
+						int selec = sc.nextInt();
+						if (selec == 1) {
+							continue;
+						} else {
+							break;
+						}
 					}
 				}
 				break;
 			// -----------------------------------------------------------------------------------------------------------------------------------------------------------
 			case 2:// 로그인
 					// 1. 사용자로부터 아이디와 비밀번호 입력 받기
+				System.out.println("\n\t\t   ================ 로그인 ================");
 				System.out.print("\n\t\t\t\t  ID 입력 : ");
 				String id = sc.next();
 				System.out.print("\t\t\t\t  PW 입력 : ");
@@ -97,7 +106,6 @@ public class FoodCatchMain {
 								break;
 
 						case 2: // 게임시작
-							da.TimeFirst(); 
 							int gameNum = 5;
 							int selectList[] = new int[gameNum];
 							int recipeNum = rdao.RecipeNumber() + 1;
@@ -112,16 +120,16 @@ public class FoodCatchMain {
 								}
 							}
 
-							int totalScore=0;
-							for(int i=0;i<gameNum;i++) {
-								System.out.printf("[%d번째 레시피 문제 시작]\n",i+1);
-								int score=30;
-								RecipeDTO rdto=rdao.getRDTO(selectList[i]);
-								String recipe[]=rdao.getRecipe(selectList[i]);
-								for(int j=0;j<6;j++) {
-									System.out.printf("레시피 - %d : %s\n",j+1,recipe[j]);
-									if(j%2==1) {
-										switch(j/2) {
+							int totalScore = 0;
+							for (int i = 0; i < gameNum; i++) {
+								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
+								int score = 30;
+								RecipeDTO rdto = rdao.getRDTO(selectList[i]);
+								String recipe[] = rdao.getRecipe(selectList[i]);
+								for (int j = 0; j < 6; j++) {
+									System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
+									if (j % 2 == 1) {
+										switch (j / 2) {
 										case 0:
 											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
 											rdto.getHint1();
@@ -131,39 +139,37 @@ public class FoodCatchMain {
 											rdto.getHint2();
 											break;
 										case 2:
-											System.out.println("세번째 힌트 : rdto.getHint3()");
+											System.out.println("세번째 힌트 : " + rdto.getHint3());
 											break;
 										}
 									}
 									System.out.print("정답 >> ");
-									String ans=sc.next();
-									if(ans.equals(rdto.getAns())) {
-										totalScore+=score;
-										System.out.printf("정답입니다! (+%d)\n\n",score);
+									String ans = sc.next();
+									if (ans.equals(rdto.getAns())) {
+										totalScore += score;
+										System.out.printf("정답입니다! (+%d)\n\n", score);
 										break;
 									}
 									System.out.println("오답입니다!(-5)\n");
-									score-=5;
+									score -= 5;
 								}
-								if(score==0) {
+								if (score == 0) {
 									System.out.println("기회를 다 소진했습니다.. (+0)\n");
 								}
 								System.out.println("\n\n\n\n\n");
 							}
-							
-							System.out.println(("총점 : ")+totalScore);
+
+							System.out.println(("총점 : ") + totalScore);
 
 							break;
 						case 3:// 랭킹보기
 							ArrayList<Score_DTO> arr = dao.rank();
 
-							System.out.println(" == 점수보기 == ");
-
-							System.out.print("닉네임\t스코어");
+							System.out.println("\n\t\t   ============== 점수 보기 ==============");
+							System.out.printf("\t\t\t%10s%9s\n\t\t\t %10s%10s", "닉네임", "스코어", "===", "===");
 							System.out.println();
 							for (int i = 0; i < arr.size(); i++) {
-
-								System.out.print(arr.get(i).getName() + " \t" + arr.get(i).getScore());
+								System.out.printf("\t\t\t%10s%10d", arr.get(i).getName(), arr.get(i).getScore());
 								System.out.println();
 							}
 							break;
@@ -182,7 +188,7 @@ public class FoodCatchMain {
 			// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			case 3:
 				System.out.println("시스템 종료");
-				
+
 				break;
 			}// <-- input switch
 			if (input == 3) {
