@@ -1,9 +1,9 @@
-package Conn;
+package Controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DAO {
+public class TimerController {
 	int countmain = 6;
 	int countfirst;
 

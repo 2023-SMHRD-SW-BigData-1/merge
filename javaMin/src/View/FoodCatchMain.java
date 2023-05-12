@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import Conn.DAO;
+import Controller.MusicController;
+import Controller.TimerController;
+import JDBC.HintPaint;
 import JDBC.Member_DAO;
 import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
 import JDBC.RecipeDTO;
 import JDBC.Score_DTO;
-					// 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
+
+// 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
 public class FoodCatchMain {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Member_DAO dao = new Member_DAO();
-		DAO da = new DAO();
+		TimerController da = new TimerController();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
+		MusicController mp3 = new MusicController();
 
 		while (true) {
 
@@ -82,7 +86,7 @@ public class FoodCatchMain {
 				if (dto != null) {// 로그인 성공
 					while (true) {
 						System.out.println(
-								"\r\n" +  "\t░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗\r\n"
+								"\r\n" + "\t░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗\r\n"
 										+ "\t░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝\r\n"
 										+ "\t░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░\r\n"
 										+ "\t░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░\r\n"
@@ -121,53 +125,54 @@ public class FoodCatchMain {
 
 							int totalScore = 0;
 							for (int i = 0; i < gameNum; i++) {
-								for (int j = 3; j > 0; j--) {
-									System.out.println("\n\t\t\t\t   "+"[ "+j+" ]");
-									try {
-										Thread.sleep(1000);
-									} catch (InterruptedException e) {
-									}
-								}	
-								System.out.println("\r\n"
-										+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
-										+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
-										+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
-										+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
-										+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
-										+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
-								System.out.println("\n\t\t   ================ 시작!! ================");
-								
-								
-								System.out.printf("\t\t\t     [%d번째 레시피 문제 시작]\n", i + 1);
+								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
 								int score = 30;
-								RecipeDTO rdto = rdao.getRDTP(selectList[i]);
+								RecipeDTO rdto = rdao.getRDTO(selectList[i]);
 								String recipe[] = rdao.getRecipe(selectList[i]);
 								for (int j = 0; j < 6; j++) {
-									System.out.printf("\t %d : %s\n", j + 1, recipe[j]);
-									System.out.print("\t 정답 >> ");
+									System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
+									if (j % 2 == 1) {
+										switch (j / 2) {
+										case 0:
+											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
+											mp3.play(rdto.getHint1());
+											break;
+										case 1:
+											System.out.println("두번째 힌트 : 그림 힌트 출력");
+											new HintPaint(rdto.getHint2());
+											break;
+										case 2:
+											System.out.println("세번째 힌트 : " + rdto.getHint3());
+											break;
+										}
+									}
+									System.out.print("정답 >> ");
 									String ans = sc.next();
 									if (ans.equals(rdto.getAns())) {
 										totalScore += score;
-										System.out.println("\t 정답입니다!\n");
+										System.out.printf("정답입니다! (+%d)\n\n", score);
 										break;
 									}
 									System.out.println("\t 오답입니다!(-5)\n");
 									score -= 5;
 								}
-								System.out.println("\n\n");
+								if (score == 0) {
+									System.out.println("기회를 다 소진했습니다.. (+0)\n");
+								}
+								System.out.println("\n\n\n\n\n");
 							}
 
 							System.out.println(("총점 : ") + totalScore);
-							
+
 							break;
 						case 3:// 랭킹보기
 							ArrayList<Score_DTO> arr = dao.rank();
 
 							System.out.println("\n\t\t   ============== 점수 보기 ==============");
-							System.out.printf("\t\t\t%10s%9s\n\t\t\t %10s%10s","닉네임","스코어","===","===");
-							System.out.println();		
+							System.out.printf("\t\t\t%10s%9s\n\t\t\t %10s%10s", "닉네임", "스코어", "===", "===");
+							System.out.println();
 							for (int i = 0; i < arr.size(); i++) {
-								System.out.printf("\t\t\t%10s%10d",arr.get(i).getName(),arr.get(i).getScore());
+								System.out.printf("\t\t\t%10s%10d", arr.get(i).getName(), arr.get(i).getScore());
 								System.out.println();
 							}
 							break;
