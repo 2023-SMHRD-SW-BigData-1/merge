@@ -78,7 +78,7 @@ public class RecipeDAO {
 		return result;
 	}
 
-	public RecipeDTO getRDTP(int i) {
+	public RecipeDTO getRDTO(int i) {
 		getConn();
 		RecipeDTO result = null;
 		String sql = "select answer,hint1,hint2,hint3 from question where num=?";

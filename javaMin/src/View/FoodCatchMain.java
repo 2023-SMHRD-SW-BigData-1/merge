@@ -116,19 +116,37 @@ public class FoodCatchMain {
 							for(int i=0;i<gameNum;i++) {
 								System.out.printf("[%d번째 레시피 문제 시작]\n",i+1);
 								int score=30;
-								RecipeDTO rdto=rdao.getRDTP(selectList[i]);
+								RecipeDTO rdto=rdao.getRDTO(selectList[i]);
 								String recipe[]=rdao.getRecipe(selectList[i]);
 								for(int j=0;j<6;j++) {
 									System.out.printf("레시피 - %d : %s\n",j+1,recipe[j]);
+									if(j%2==1) {
+										switch(j/2) {
+										case 0:
+											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
+											rdto.getHint1();
+											break;
+										case 1:
+											System.out.println("두번째 힌트 : 그림 힌트 출력");
+											rdto.getHint2();
+											break;
+										case 2:
+											System.out.println("세번째 힌트 : rdto.getHint3()");
+											break;
+										}
+									}
 									System.out.print("정답 >> ");
 									String ans=sc.next();
 									if(ans.equals(rdto.getAns())) {
 										totalScore+=score;
-										System.out.println("정답입니다!\n");
+										System.out.printf("정답입니다! (+%d)\n\n",score);
 										break;
 									}
 									System.out.println("오답입니다!(-5)\n");
 									score-=5;
+								}
+								if(score==0) {
+									System.out.println("기회를 다 소진했습니다.. (+0)\n");
 								}
 								System.out.println("\n\n\n\n\n");
 							}
