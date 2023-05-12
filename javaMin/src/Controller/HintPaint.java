@@ -17,13 +17,13 @@ public class HintPaint extends JFrame {
    public void frame() {
 
       setTitle("Hint");
-      setSize(1000,800);
+      setSize(900,700);
       setResizable(false);
       setLocationRelativeTo(null);
       setVisible(true);
    }
 
    public void paint(Graphics g) {
-      g.drawImage(background, 100, 100, null);
+      g.drawImage(background, 50, 50, null);
    }
 }
