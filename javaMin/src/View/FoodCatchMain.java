@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import Conn.DAO;
+import Controller.MusicController;
+import Controller.TimerController;
 import JDBC.Member_DAO;
 import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
 import JDBC.RecipeDTO;
 import JDBC.Score_DTO;
-import javazoom.jl.player.MP3Player;
 
 // 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
 public class FoodCatchMain {
@@ -18,12 +18,10 @@ public class FoodCatchMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Member_DAO dao = new Member_DAO();
-		DAO da = new DAO();
+		TimerController da = new TimerController();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
-		
-		MP3Player mp3 = new MP3Player();
-		mp3.play("C:\\Users\\smhrd\\Desktop\\workspace\\Project\\player\\1.mp3");
+		MusicController mp3 = new MusicController();
 
 		while (true) {
 
@@ -136,7 +134,7 @@ public class FoodCatchMain {
 										switch (j / 2) {
 										case 0:
 											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
-											rdto.getHint1();
+											mp3.play(rdto.getHint1());
 											break;
 										case 1:
 											System.out.println("두번째 힌트 : 그림 힌트 출력");
