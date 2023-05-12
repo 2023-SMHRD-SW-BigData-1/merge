@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Controller.HintPaint;
 import Controller.MusicController;
 import Controller.TimerController;
-import JDBC.HintPaint;
 import JDBC.Member_DAO;
 import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
@@ -24,6 +24,8 @@ public class FoodCatchMain {
 		RecipeDAO rdao = new RecipeDAO();
 		MusicController mctl=new MusicController();
 
+		
+		
 		while (true) {
 
 			System.out.println("\r\n" + "\r\n"
@@ -139,7 +141,8 @@ public class FoodCatchMain {
 											break;
 										case 1:
 											System.out.println("두번째 힌트 : 그림 힌트 출력");
-											new HintPaint(rdto.getHint2());
+											HintPaint hint=new HintPaint(rdto.getHint2());
+											hint.frame();
 											break;
 										case 2:
 											System.out.println("세번째 힌트 : " + rdto.getHint3());
