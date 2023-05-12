@@ -10,6 +10,7 @@ import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
 import JDBC.RecipeDTO;
 import JDBC.Score_DTO;
+import javazoom.jl.player.MP3Player;
 
 // 정렬 하지 말아주세요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 글자 다 깨져요!!!!!!!!!!!!!
 public class FoodCatchMain {
@@ -20,6 +21,9 @@ public class FoodCatchMain {
 		DAO da = new DAO();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
+		
+		MP3Player mp3 = new MP3Player();
+		mp3.play("C:\\Users\\smhrd\\Desktop\\workspace\\Project\\player\\1.mp3");
 
 		while (true) {
 
