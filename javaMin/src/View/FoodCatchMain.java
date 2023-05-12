@@ -22,7 +22,7 @@ public class FoodCatchMain {
 		TimerController da = new TimerController();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
-		MusicController mp3 = new MusicController();
+		MusicController mctl=new MusicController();
 
 		while (true) {
 
@@ -135,7 +135,7 @@ public class FoodCatchMain {
 										switch (j / 2) {
 										case 0:
 											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
-											mp3.play(rdto.getHint1());
+											mctl.play(rdto.getHint1());
 											break;
 										case 1:
 											System.out.println("두번째 힌트 : 그림 힌트 출력");
