@@ -148,10 +148,10 @@ public class FoodCatchMain {
 									String ans = sc.next();
 									if (ans.equals(rdto.getAns())) {
 										totalScore += score;
-										System.out.println("정답입니다!\n");
+										System.out.println("\t 정답입니다!\n");
 										break;
 									}
-									System.out.println("오답입니다!(-5)\n");
+									System.out.println("\t 오답입니다!(-5)\n");
 									score -= 5;
 								}
 								System.out.println("\n\n");
