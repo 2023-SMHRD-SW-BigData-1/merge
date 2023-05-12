@@ -124,23 +124,23 @@ public class FoodCatchMain {
 									}
 								}
 							}
-							for (int j = 3; j > 0; j--) {
-								System.out.println("\n\t\t\t\t   "+"[ "+j+" ]");
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-								}
-							}	
-							System.out.println("\r\n"
-									+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
-									+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
-									+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
-									+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
-									+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
-									+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
-							System.out.println("\n\t\t   ================ 시작!! ================");
 							int totalScore = 0;
 							for (int i = 0; i < gameNum; i++) {
+								for (int j = 3; j > 0; j--) {
+									System.out.println("\n\t\t\t\t   "+"[ "+j+" ]");
+									try {
+										Thread.sleep(1000);
+									} catch (InterruptedException e) {
+									}
+								}	
+								System.out.println("\r\n"
+										+ "\t\t\t    ░██████╗░░█████╗░██╗██╗\r\n"
+										+ "\t\t\t    ██╔════╝░██╔══██╗██║██║\r\n"
+										+ "\t\t\t    ██║░░██╗░██║░░██║██║██║\r\n"
+										+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
+										+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
+										+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
+								System.out.println("\n\t\t   ================ 시작!! ================");
 								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
 								int score = 30;
 								RecipeDTO rdto = rdao.getRDTO(selectList[i]);
