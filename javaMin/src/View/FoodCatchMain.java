@@ -162,7 +162,7 @@ public class FoodCatchMain {
 
 							            try {
 							               for (int i = 10; i > 0; i--) {
-							                  if(i == 1) {                     
+							                  if(i <= 2) {                     
 							                     System.out.println("\n\t\t\t       [" + i + "0초 남았습니다.]\n");
 							                  }
 							                  sleep(10000);
