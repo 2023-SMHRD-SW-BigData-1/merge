@@ -159,7 +159,7 @@ public class FoodCatchMain {
 							         public void run() {
 
 							            try {
-							               for (int i = 6; i > 0; i--) {
+							               for (int i = 10; i > 0; i--) {
 							                  if(i <= 2) {                     
 							                     System.out.println("\n\t\t\t       [" + i + "0초 남았습니다.]\n");
 							                  }
