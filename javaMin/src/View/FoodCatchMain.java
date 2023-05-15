@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Controller.CancelableScanner;
-import Controller.GameController;
 import Controller.HintPaint;
 import Controller.MusicController;
 
@@ -123,7 +122,6 @@ public class FoodCatchMain {
 							break;
 
 						case 2: // 게임시작
-							GameController gctl=new GameController();
 							int gameNum = 5; //게임횟수
 							int selectList[] = new int[gameNum];
 							int recipeNum = rdao.RecipeNumber() + 1;
