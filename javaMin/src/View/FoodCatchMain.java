@@ -193,9 +193,14 @@ public class FoodCatchMain {
 															mctl.play(rdto.getHint1());
 															break;
 														case 1:
-															System.out.println("\n\t\t\t   [두번째 힌트 : 그림 힌트 출력]\n");
-															HintPaint hint=new HintPaint(rdto.getHint2());
-															hint.frame();
+															try {
+																
+																System.out.println("\n\t\t\t   [두번째 힌트 : 그림 힌트 출력]\n");
+																HintPaint hint=new HintPaint(rdto.getHint2());
+																hint.frame();
+															} catch (Exception e) {
+																System.out.println("로딩실패..");
+															}
 															break;
 														case 2:
 															System.out.println("\n\t\t\t    [세번째 힌트 : " + rdto.getHint3()+"]\n");
