@@ -97,7 +97,7 @@ public class Member_DAO {
 
 		ArrayList<Score_DTO> arr = new ArrayList<>();
 		getConn();
-		String sql = "SELECT NAME, SCORE FROM Member WHERE ROWNUM <=5 ORDER BY SCORE DESC";
+		String sql = "SELECT NAME, SCORE FROM (select * from Member ORDER BY SCORE DESC) WHERE ROWNUM <=5 ";
 		try {
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
