@@ -28,7 +28,7 @@ public class FoodCatchMain {
 		
 		
 		while (true) {
-
+			   System.out.println();
 			   System.out.println(
 				          " .o88b.  .d88b.   .d88b.  db   dD   d8888b.  .d8b.  d8888b. d8888b. db    db \r\n"
 				         + "d8P  Y8 .8P  Y8. .8P  Y8. 88 ,8P'   88  `8D d8' `8b 88  `8D 88  `8D `8b  d8' \r\n"
@@ -89,6 +89,7 @@ public class FoodCatchMain {
 				Member_DTO dto = dao.login(id, pw);
 				if (dto != null) {// 로그인 성공
 					while (true) {
+						 System.out.println();
 						 System.out.println(
 		                          "\tdb   d8b   db d88888b db       .o88b.  .d88b.  .88b  d88. d88888b \r\n"
 		                        + "\t88   I8I   88 88'     88      d8P  Y8 .8P  Y8. 88'YbdP`88 88'     \r\n"
@@ -234,12 +235,12 @@ public class FoodCatchMain {
 										}
 								}
 							
-							System.out.println("총점 : "+totalScore);
+							System.out.println("\t\t\t        [총점 : "+totalScore+"]");
 							if(dto.getScore()<totalScore) {
-								System.out.println("최고점을 달성했습니다!");
+								System.out.println("\n\t\t\t       [최고점을 달성했습니다!]");
 								dao.updateScore(dto.getId(),totalScore);
 							}
-							System.out.println("초기화면으로 돌아갑니다.");
+							System.out.println("\n\t\t   ============== 초기화면으로 돌아갑니다. ==============");
 							
 							System.out.println("\n\n");
 							break;
@@ -271,6 +272,9 @@ public class FoodCatchMain {
 				System.out.println("\n\t\t   ================ 시스템 종료 ================");
 
 				break;
+			default :	
+				
+			continue;	
 			}// <-- input switch
 			if (input == 3) {
 				break;
