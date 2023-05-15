@@ -116,4 +116,19 @@ public class Member_DAO {
 		return arr;
 	}
 
+	public void updateScore(String id, int totalScore) {
+		getConn();
+		String sql="update member set score=? where id=?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, totalScore);
+			pst.setString(2, id);			
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			getClose();
+		}
+	}
+
 }

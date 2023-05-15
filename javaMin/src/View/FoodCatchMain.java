@@ -206,22 +206,13 @@ public class FoodCatchMain {
 															break;
 														}
 													}
-													int triger = 0;
-													for (int b = 0; b < 6; b++) {
 													if (cancelableScanner.readLine().equals(rdto.getAns())) {
 														totalScore += score;
 														System.out.printf("\n\t\t\t       [정답입니다! (+%d)]\n", score);
-														triger = 1;
 														break;
 													}
 													System.out.println("\n\t\t\t       [오답입니다!(-5)]\n");
 													score -= 5;
-													break;
-													}
-													
-													if(triger == 1) {
-														break;
-													}
 													
 												}		
 											} catch (Exception e) {
@@ -231,16 +222,19 @@ public class FoodCatchMain {
 								      cancelThread.interrupt();
 								      
 								      try {
+								    	    if(i!=4)
 											System.out.println("\n\t\t\t        다음 문제 준비..");
 											Thread.sleep(3000);
 										} catch (InterruptedException e) {
 										}
-								      
-								      
-								      
 								}
 							
-							
+							System.out.println("총점 : "+totalScore);
+							if(dto.getScore()<totalScore) {
+								System.out.println("최고점을 달성했습니다!");
+								dao.updateScore(dto.getId(),totalScore);
+							}
+							System.out.println("초기화면으로 돌아갑니다.");
 							
 							System.out.println("\n\n");
 							break;
