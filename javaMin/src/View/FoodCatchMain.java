@@ -106,10 +106,20 @@ public class FoodCatchMain {
 									+ "\n\t-- 3번째, 5번째, 6번째 조리방법 오픈시 힌트 추가제공" + "\n\t-- 한 문제 당 제한시간은 100초, 총 문제는 5문제");
 							System.out.println("\n");
 							System.out.print("\t\t\t\t [1]확인 >> ");
+							int triger1 = 0;
+							while(true) {
 							int select = sc.nextInt();
-							System.out.println("\n");
-							if (select == 1)
+							switch (select) {
+							case 1:
+								triger1 = 1;
 								break;
+							default:	
+								continue;
+							}
+							if(triger1 == 1) break;	
+							}
+							
+							break;
 
 						case 2: // 게임시작
 							int gameNum = 5;
@@ -143,7 +153,7 @@ public class FoodCatchMain {
 										+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
 								System.out.println("\n\t\t   ================ 시작!! ================");								
 //-----------------------------------------------time out-------------------------------------------------------------------------------								
-								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
+								System.out.printf("\n\t\t\t     [%d번째 레시피 문제 시작]\n\n", i + 1);
 
 								// cancelScanner 선언
 							      CancelableScanner cancelableScanner = new CancelableScanner();
@@ -157,7 +167,7 @@ public class FoodCatchMain {
 							            try {
 							               for (int i = 10; i > 0; i--) {
 							                  if(i == 1) {                     
-							                     System.out.println("\n\t\t[" + i + "0초 남았습니다.]");
+							                     System.out.println("\n\t\t\t       [" + i + "0초 남았습니다.]\n");
 							                  }
 							                  sleep(10000);
 							               }  
@@ -175,20 +185,20 @@ public class FoodCatchMain {
 								    		  RecipeDTO rdto = rdao.getRDTO(selectList[i]);
 												String recipe[] = rdao.getRecipe(selectList[i]);
 												for (int j = 0; j < 6; j++) {
-													System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
+													System.out.printf("\t\t레시피 - %d : %s\n", j + 1, recipe[j].replace("!", "\n\t\t\t  "));
 													if (j % 2 == 1) {
 														switch (j / 2) {
 														case 0:
-															System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
+															System.out.println("\n\t\t     [첫번째 힌트 : 백종원유튜브의 먹는 소리 출력]\n");
 															mctl.play(rdto.getHint1());
 															break;
 														case 1:
-															System.out.println("두번째 힌트 : 그림 힌트 출력");
+															System.out.println("\n\t\t\t   [두번째 힌트 : 그림 힌트 출력]\n");
 															HintPaint hint=new HintPaint(rdto.getHint2());
 															hint.frame();
 															break;
 														case 2:
-															System.out.println("세번째 힌트 : " + rdto.getHint3());
+															System.out.println("\n\t\t\t    [세번째 힌트 : " + rdto.getHint3()+"]\n");
 															break;
 														}
 													}
@@ -196,11 +206,11 @@ public class FoodCatchMain {
 													for (int b = 0; b < 6; b++) {
 													if (cancelableScanner.readLine().equals(rdto.getAns())) {
 														totalScore += score;
-														System.out.printf("정답입니다! (+%d)\n\n", score);
+														System.out.printf("\n\t\t\t       [정답입니다! (+%d)]\n", score);
 														triger = 1;
 														break;
 													}
-													System.out.println("\t 오답입니다!(-5)\n");
+													System.out.println("\n\t\t\t       [오답입니다!(-5)]\n");
 													score -= 5;
 													break;
 													}
@@ -211,13 +221,24 @@ public class FoodCatchMain {
 													
 												}		
 											} catch (Exception e) {
-												System.out.println("time out!!");
+												System.out.println("\t\t\t        [Time Out!!]");
 											}							    
 								      // 메인 쓰레드가 끝날때 cancelThread 도 중단시킴
 								      cancelThread.interrupt();
-	
+								      
+								      try {
+											System.out.println("\n\t\t\t        다음 문제 준비..");
+											Thread.sleep(3000);
+										} catch (InterruptedException e) {
+										}
+								      
+								      
+								      
 								}
-							System.out.println("\n\n\n\n\n");
+							
+							
+							
+							System.out.println("\n\n");
 							break;
 						case 3:// 랭킹보기
 							ArrayList<Score_DTO> arr = dao.rank();
@@ -239,12 +260,12 @@ public class FoodCatchMain {
 						}
 					} // <--input2 while
 				} else {
-					System.out.println("로그인 실패");
+					System.out.println("\n\t\t   ================ 로그인 실패 ================");
 				}
 				break;
 			// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			case 3:
-				System.out.println("시스템 종료");
+				System.out.println("\n\t\t   ================ 시스템 종료 ================");
 
 				break;
 			}// <-- input switch
