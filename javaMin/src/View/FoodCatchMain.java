@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Controller.CancelableScanner;
+import Controller.GameController;
 import Controller.HintPaint;
 import Controller.MusicController;
 
@@ -20,7 +21,7 @@ public class FoodCatchMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Member_DAO dao = new Member_DAO();
-		
+		GameController gctl=new GameController();
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
 		MusicController mctl=new MusicController();
@@ -126,18 +127,7 @@ public class FoodCatchMain {
 
 						case 2: // 게임시작
 							int gameNum = 5; //게임횟수
-							int selectList[] = new int[gameNum];
-							int recipeNum = rdao.RecipeNumber() + 1;
-							for (int i = 0; i < gameNum; i++) {
-								int random = ran.nextInt(recipeNum);
-								selectList[i] = random;
-								for (int j = 0; j < i; j++) {
-									if (selectList[j] == random) {
-										i--;
-										break;
-									}
-								}
-							}
+							int selectList[] = gctl.listSel(gameNum,rdao.RecipeNumber()+1);
 							int totalScore = 0;
 							for (int i = 0; i < gameNum; i++) {
 								for (int j = 3; j > 0; j--) {
