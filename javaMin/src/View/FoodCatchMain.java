@@ -194,7 +194,6 @@ public class FoodCatchMain {
 															break;
 														case 1:
 															try {
-																
 																System.out.println("\n\t\t\t   [두번째 힌트 : 그림 힌트 출력]\n");
 																HintPaint hint=new HintPaint(rdto.getHint2());
 																hint.frame();
