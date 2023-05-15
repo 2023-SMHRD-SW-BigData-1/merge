@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Controller.CancelableScanner;
 import Controller.HintPaint;
 import Controller.MusicController;
-import Controller.TimerController;
+
 import JDBC.Member_DAO;
 import JDBC.Member_DTO;
 import JDBC.RecipeDAO;
@@ -19,7 +20,7 @@ public class FoodCatchMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Member_DAO dao = new Member_DAO();
-		TimerController da = new TimerController();
+		
 		Random ran = new Random();
 		RecipeDAO rdao = new RecipeDAO();
 		MusicController mctl=new MusicController();
@@ -140,47 +141,83 @@ public class FoodCatchMain {
 										+ "\t\t\t    ██║░░╚██╗██║░░██║╚═╝╚═╝\r\n"
 										+ "\t\t\t    ╚██████╔╝╚█████╔╝██╗██╗\r\n"
 										+ "\t\t\t    ░╚═════╝░░╚════╝░╚═╝╚═╝");
-								System.out.println("\n\t\t   ================ 시작!! ================");
+								System.out.println("\n\t\t   ================ 시작!! ================");								
+//-----------------------------------------------time out-------------------------------------------------------------------------------								
 								System.out.printf("[%d번째 레시피 문제 시작]\n", i + 1);
-								int score = 30;
-								RecipeDTO rdto = rdao.getRDTO(selectList[i]);
-								String recipe[] = rdao.getRecipe(selectList[i]);
-								for (int j = 0; j < 6; j++) {
-									System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
-									if (j % 2 == 1) {
-										switch (j / 2) {
-										case 0:
-											System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
-											mctl.play(rdto.getHint1());
-											break;
-										case 1:
-											System.out.println("두번째 힌트 : 그림 힌트 출력");
-											HintPaint hint=new HintPaint(rdto.getHint2());
-											hint.frame();
-											break;
-										case 2:
-											System.out.println("세번째 힌트 : " + rdto.getHint3());
-											break;
-										}
-									}
-									System.out.print("정답 >> ");
-									String ans = sc.next();
-									if (ans.equals(rdto.getAns())) {
-										totalScore += score;
-										System.out.printf("정답입니다! (+%d)\n\n", score);
-										break;
-									}
-									System.out.println("\t 오답입니다!(-5)\n");
-									score -= 5;
-								}
-								if (score == 0) {
-									System.out.println("기회를 다 소진했습니다.. (+0)\n");
-								}
-								System.out.println("\n\n\n\n\n");
-							}
 
-							System.out.println(("총점 : ") + totalScore);
+								// cancelScanner 선언
+							      CancelableScanner cancelableScanner = new CancelableScanner();
 
+							      // 취소 스레드 선언1
+
+							      Thread cancelThread = new Thread() {
+							         @Override
+							         public void run() {
+
+							            try {
+							               for (int i = 10; i > 0; i--) {
+							                  if(i == 1) {                     
+							                     System.out.println("\n\t\t[" + i + "0초 남았습니다.]");
+							                  }
+							                  sleep(10000);
+							               }  
+							               cancelableScanner.cancel();	               
+							            } catch (Exception e) {
+							               
+							            }
+							         }
+							      };
+//-----------------------------------------------------------------------시간			      
+							      // 취소 스레드를 실행
+							      cancelThread.start();
+								int score = 30;						    	  
+								    	  try {		    		  
+								    		  RecipeDTO rdto = rdao.getRDTO(selectList[i]);
+												String recipe[] = rdao.getRecipe(selectList[i]);
+												for (int j = 0; j < 6; j++) {
+													System.out.printf("레시피 - %d : %s\n", j + 1, recipe[j]);
+													if (j % 2 == 1) {
+														switch (j / 2) {
+														case 0:
+															System.out.println("첫번째 힌트 : 백종원유튜브의 먹는 소리 출력");
+															mctl.play(rdto.getHint1());
+															break;
+														case 1:
+															System.out.println("두번째 힌트 : 그림 힌트 출력");
+															HintPaint hint=new HintPaint(rdto.getHint2());
+															hint.frame();
+															break;
+														case 2:
+															System.out.println("세번째 힌트 : " + rdto.getHint3());
+															break;
+														}
+													}
+													int triger = 0;
+													for (int b = 0; b < 6; b++) {
+													if (cancelableScanner.readLine().equals(rdto.getAns())) {
+														totalScore += score;
+														System.out.printf("정답입니다! (+%d)\n\n", score);
+														triger = 1;
+														break;
+													}
+													System.out.println("\t 오답입니다!(-5)\n");
+													score -= 5;
+													break;
+													}
+													
+													if(triger == 1) {
+														break;
+													}
+													
+												}		
+											} catch (Exception e) {
+												System.out.println("time out!!");
+											}							    
+								      // 메인 쓰레드가 끝날때 cancelThread 도 중단시킴
+								      cancelThread.interrupt();
+	
+								}
+							System.out.println("\n\n\n\n\n");
 							break;
 						case 3:// 랭킹보기
 							ArrayList<Score_DTO> arr = dao.rank();
